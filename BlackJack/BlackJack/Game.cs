@@ -21,7 +21,7 @@ namespace BlackJack
             int score = 0;
             Card PlayerCard = deck.PickCard();
             score += PlayerCard.Value;
-            Console.WriteLine("You got {0} of {1}, value is {3}", PlayerCard.Name, PlayerCard.Suit, PlayerCard.Value);
+            Console.WriteLine("You got {0} of {1}, value is {2}", PlayerCard.Name, PlayerCard.Suit, PlayerCard.Value);
             return score;
         }
 
@@ -47,7 +47,7 @@ namespace BlackJack
                 }
 
                 Console.WriteLine("Take card? Y/N");
-                string choise = Console.ReadKey().ToString();
+                string choise = Console.ReadLine().ToString();
                 if (choise == "y" || choise == "Y")
                 {
                     PlayerScore += TakeCard(deck);

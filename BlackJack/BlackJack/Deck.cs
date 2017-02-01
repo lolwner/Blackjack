@@ -16,8 +16,8 @@ namespace BlackJack
 
             for (int i = 0; i <= 8; i++)
             {
-                string name = i+2.ToString();
-                deck.Add(new BlackJack.Card(name, "Clubs", i+2));
+                int name = i + 2;
+                deck.Add(new BlackJack.Card(name.ToString(), "Clubs", i+2));
             }
             deck.Add(new Card("Ace", "Clubs", 11));
             deck.Add(new Card("King", "Clubs", 10));
@@ -26,8 +26,8 @@ namespace BlackJack
 
             for (int i = 0; i <= 8; i++)
             {
-                string name = i + 2.ToString();
-                deck.Add(new BlackJack.Card(name, "Spades", i + 2));
+                int name = i + 2;
+                deck.Add(new BlackJack.Card(name.ToString(), "Spades", i + 2));
             }
             deck.Add(new Card("Ace", "Spades", 11));
             deck.Add(new Card("King", "Spades", 10));
@@ -36,8 +36,8 @@ namespace BlackJack
 
             for (int i = 0; i <= 8; i++)
             {
-                string name = i + 2.ToString();
-                deck.Add(new BlackJack.Card(name, "Hearts", i + 2));
+                int name = i + 2;
+                deck.Add(new BlackJack.Card(name.ToString(), "Hearts", i + 2));
             }
             deck.Add(new Card("Ace", "Hearts", 11));
             deck.Add(new Card("King", "Hearts", 10));
@@ -46,8 +46,8 @@ namespace BlackJack
 
             for (int i = 0; i <= 8; i++)
             {
-                string name = i + 2.ToString();
-                deck.Add(new BlackJack.Card(name, "Diamonds", i + 2));
+                int name = i + 2;
+                deck.Add(new BlackJack.Card(name.ToString(), "Diamonds", i + 2));
             }
             deck.Add(new Card("Ace", "Diamonds", 11));
             deck.Add(new Card("King", "Diamonds", 10));
