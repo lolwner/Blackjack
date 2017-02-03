@@ -6,57 +6,47 @@ using System.Threading.Tasks;
 
 namespace BlackJack
 {
-    public class Deck 
+    public class Deck
     {
-        public List<Card> deck; 
+        public List<Card> deck;
 
-        public Deck()
+        enum Suits
+        {
+            Clubs,
+            Spades,
+            Hearts,
+            Diamonds
+        };
+
+        public void InitializeDeck()
         {
             deck = new List<Card>();
 
-            for (int i = 0; i <= 8; i++)
-            {
-                int name = i + 2;
-                deck.Add(new BlackJack.Card(name.ToString(), "Clubs", i+2));
-            }
-            deck.Add(new Card("Ace", "Clubs", 11));
-            deck.Add(new Card("King", "Clubs", 10));
-            deck.Add(new Card("Queen", "Clubs", 10));
-            deck.Add(new Card("Jack", "Clubs", 10));
+            Dictionary<string, int> CardNameValue = new Dictionary<string, int>();
+            CardNameValue.Add("Two", 2);
+            CardNameValue.Add("Three", 3);
+            CardNameValue.Add("Four", 4);
+            CardNameValue.Add("Five", 5);
+            CardNameValue.Add("Six", 6);
+            CardNameValue.Add("Seven", 7);
+            CardNameValue.Add("Eight", 8);
+            CardNameValue.Add("Nine", 9);
+            CardNameValue.Add("Ten", 10);
+            CardNameValue.Add("Ace", 11);
+            CardNameValue.Add("King", 10);
+            CardNameValue.Add("Queen", 10);
+            CardNameValue.Add("Jack", 10);
 
-            for (int i = 0; i <= 8; i++)
+            foreach (Suits suit in Enum.GetValues(typeof(Suits)))
             {
-                int name = i + 2;
-                deck.Add(new BlackJack.Card(name.ToString(), "Spades", i + 2));
+                foreach (var item in CardNameValue)
+                {
+                    deck.Add(new Card(item.Key, suit.ToString(), item.Value));
+                }
             }
-            deck.Add(new Card("Ace", "Spades", 11));
-            deck.Add(new Card("King", "Spades", 10));
-            deck.Add(new Card("Queen", "Spades", 10));
-            deck.Add(new Card("Jack", "Spades", 10));
-
-            for (int i = 0; i <= 8; i++)
-            {
-                int name = i + 2;
-                deck.Add(new BlackJack.Card(name.ToString(), "Hearts", i + 2));
-            }
-            deck.Add(new Card("Ace", "Hearts", 11));
-            deck.Add(new Card("King", "Hearts", 10));
-            deck.Add(new Card("Queen", "Hearts", 10));
-            deck.Add(new Card("Jack", "Hearts", 10));
-
-            for (int i = 0; i <= 8; i++)
-            {
-                int name = i + 2;
-                deck.Add(new BlackJack.Card(name.ToString(), "Diamonds", i + 2));
-            }
-            deck.Add(new Card("Ace", "Diamonds", 11));
-            deck.Add(new Card("King", "Diamonds", 10));
-            deck.Add(new Card("Queen", "Diamonds", 10));
-            deck.Add(new Card("Jack", "Diamonds", 10));
-
         }
-        
-        private static Random rng = new Random(); 
+
+        private static Random rng = new Random();
 
         public static void Shuffle(List<Card> list)
         {
