@@ -25,6 +25,7 @@ namespace BlackJack
 
         public static void ShowScore(int score)
         {
+            
             Console.WriteLine("Score is {0}", score);
         }
 

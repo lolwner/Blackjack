@@ -11,16 +11,18 @@ namespace BlackJack
         public int PlayerScore;
         public int CasinoScore;
 
-
+        public static Random rng = new Random();
         public int TakeCard(Deck deck)
         {
+
+            int k = rng.Next(0, deck.cardDeck.Count);
+            Card card = deck.cardDeck[k];
             int score = 0;
-            Card card = deck.PickCard();
             score += card.Value;
             MSG.ShowCard(card);
             return score;
         }
-        
+
 
         public void Play()
         {

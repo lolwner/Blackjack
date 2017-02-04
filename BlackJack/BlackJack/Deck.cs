@@ -8,7 +8,7 @@ namespace BlackJack
 {
     public class Deck
     {
-        public List<Card> deck;
+        public List<Card> cardDeck;
 
         enum Suits
         {
@@ -20,7 +20,7 @@ namespace BlackJack
 
         public void InitializeDeck()
         {
-            deck = new List<Card>();
+            cardDeck = new List<Card>();
 
             Dictionary<string, int> CardNameValue = new Dictionary<string, int>();
             CardNameValue.Add("Two", 2);
@@ -41,32 +41,9 @@ namespace BlackJack
             {
                 foreach (var item in CardNameValue)
                 {
-                    deck.Add(new Card(item.Key, suit.ToString(), item.Value));
+                    cardDeck.Add(new Card(item.Key, suit.ToString(), item.Value));
                 }
             }
         }
-
-        private static Random rng = new Random();
-
-        public static void Shuffle(List<Card> list)
-        {
-            int n = list.Count;
-            while (n > 1)
-            {
-                n--;
-                int k = rng.Next(n + 1);
-                var value = list[k];
-                list[k] = list[n];
-                list[n] = value;
-            }
-        }
-
-        public Card PickCard()
-        {
-            int k = rng.Next(0, deck.Count);
-            var card = deck[k];
-            return card;
-        }
-
     }
 }
