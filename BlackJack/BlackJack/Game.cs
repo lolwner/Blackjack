@@ -37,36 +37,24 @@ namespace BlackJack
             CasinoScore += TakeCard(deck);
             MSG.ShowScore(CasinoScore);
 
+            if (PlayerCheck(PlayerScore) == false)
+                return;
+
+            if (CasinoCheck(CasinoScore) == false)
+                return;
+
             while (PlayerScore < 21 && CasinoScore < 21)
             {
-
-                if (CheckScore(PlayerScore) == "BlackJack")
-                {
-                    MSG.PlayerWin();
-                    return;
-                }
-                if (CheckScore(CasinoScore) == "BlackJack")
-                {
-                    MSG.CasinoWin();
-                    return;
-                }
-
                 bool a = MSG.Continue();
 
                 if (a == false)
                 {
                     CasinoScore += TakeCard(deck);
                     MSG.ShowScore(CasinoScore);
-                    switch (CheckScore(CasinoScore))
-                    {
-                        case "BlackJack":
-                            MSG.CasinoWin();
-                            return;
-                        case "Too many":
-                            MSG.PlayerWin();
-                            return;
-                    }
-                    return;
+
+                    if (CasinoCheck(CasinoScore) == false)
+                        break;
+                        return;
                 }
 
                 if (a == true)
@@ -77,25 +65,11 @@ namespace BlackJack
                     CasinoScore += TakeCard(deck);
                     MSG.ShowScore(CasinoScore);
 
-                    switch (CheckScore(PlayerScore))
-                    {
-                        case "BlackJack":
-                            MSG.PlayerWin();
-                            return;
-                        case "Too many":
-                            MSG.CasinoWin();
-                            return;
-                    }
+                    if (PlayerCheck(PlayerScore) == false)
+                        return;
 
-                    switch (CheckScore(CasinoScore))
-                    {
-                        case "BlackJack":
-                            MSG.CasinoWin();
-                            return;
-                        case "Too many":
-                            MSG.PlayerWin();
-                            return;
-                    }
+                    if (CasinoCheck(CasinoScore) == false)
+                        return;
                 }
 
             }
@@ -112,6 +86,36 @@ namespace BlackJack
                 return "Too many";
             }
             return null;
+        }
+
+        public bool PlayerCheck(int PlayerScore)
+        {
+            if (CheckScore(PlayerScore) == "BlackJack")
+            {
+                MSG.PlayerWin();
+                return false;
+            }
+            if (CheckScore(PlayerScore) == "Too many")
+            {
+                MSG.CasinoWin();
+                return false;
+            }
+            return true;
+        }
+
+        public bool CasinoCheck(int CasinoScore)
+        {
+            if (CheckScore(CasinoScore) == "BlackJack")
+            {
+                MSG.CasinoWin();
+                return false;
+            }
+            if (CheckScore(CasinoScore) == "Too many")
+            {
+                MSG.PlayerWin();
+                return false;
+            }
+            return true;
         }
 
 

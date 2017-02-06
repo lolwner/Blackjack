@@ -23,9 +23,10 @@ namespace BlackJack
             }
         }
 
-        public void StartRound()
+        public static void StartRound()
         {
-
+            Game game = new Game();
+            game.Play();
         }
     }
 }
