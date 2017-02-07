@@ -57,5 +57,27 @@ namespace BlackJack
             return false;
 
         }
+
+        public static bool NewRound()
+        {
+            Console.WriteLine("Start new round? y/n");
+            string choise = Console.ReadLine().ToString();
+
+            while (choise != "y" || choise != "n")
+            {
+                switch (choise)
+                {
+                    case "y":
+                        return true;
+                    case "n":
+                        return false;
+                    default:
+                        Console.WriteLine("Choose y or n");
+                        choise = Console.ReadLine().ToString();
+                        break;
+                }
+            }
+            return false;
+        }
     }
 }
