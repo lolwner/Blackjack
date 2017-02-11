@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 
 namespace BlackJack
 {
-    public class Deck
+    public enum Suits
     {
-        public List<Card> cardDeck;
-        
-        
-    }
+        Clubs,
+        Spades,
+        Hearts,
+        Diamonds
+    };
 }

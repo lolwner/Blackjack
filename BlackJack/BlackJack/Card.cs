@@ -8,15 +8,8 @@ namespace BlackJack
 {
     public class Card
     {
-        public string Name; 
-        public string Suit; //масть
-        public int Value; //очки карты
-
-        public Card(string Name, string Suit, int Value)
-        {
-            this.Name = Name;
-            this.Suit = Suit;
-            this.Value = Value;
-        }
+        public string Name { get; set; }
+        public Suits Suit { get; set; }
+        public int Value { get; set; }
     }
 }

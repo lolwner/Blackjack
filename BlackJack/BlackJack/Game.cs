@@ -8,111 +8,121 @@ namespace BlackJack
 {
     public class Game
     {
-        public int PlayerScore;
-        public int CasinoScore;
+        int PlayerScore;
+        int CasinoScore;
+        const int WinValue = 21;
+        static Random RandomObj = new Random();
 
-        public static Random rng = new Random();
-        public int TakeCard(Deck deck)
+        public int TakeCard(List<Card> deck)
         {
-
-            int k = rng.Next(0, deck.cardDeck.Count);
-            Card card = deck.cardDeck[k];
+            int RandomItemIndex = RandomObj.Next(0, deck.Count);
+            Card card = deck[RandomItemIndex];
             int score = 0;
             score += card.Value;
-            MSG.ShowCard(card);
+            ConsoleUI.ShowCard(card);
             return score;
         }
 
-
-        public void Play()
+        public void Play(List<Card> deck)
         {
-            Deck deck = new Deck();
-            deck.InitializeDeck();
-
             PlayerScore += TakeCard(deck);
             PlayerScore += TakeCard(deck);
-            MSG.ShowScore(PlayerScore);
+            ConsoleUI.ShowScore(PlayerScore);
 
             CasinoScore += TakeCard(deck);
             CasinoScore += TakeCard(deck);
-            MSG.ShowScore(CasinoScore);
+            ConsoleUI.ShowScore(CasinoScore);
 
-            if (PlayerCheck(PlayerScore) == false)
+            if (CheckPlayerScore(PlayerScore) == false)
                 return;
 
-            if (CasinoCheck(CasinoScore) == false)
+            if (CheckCasinoScore(CasinoScore) == false)
                 return;
 
-            while (PlayerScore < 21 && CasinoScore < 21)
+            while (PlayerScore < WinValue && CasinoScore < WinValue)
             {
-                bool a = MSG.Continue();
+                ConsoleUI.ShowDialogContinue();
+                bool UserInput = ConsoleUI.ShowDialogUserInput();
 
-                if (a == false)
+                if (UserInput == false)
                 {
-                    CasinoScore += TakeCard(deck);
-                    MSG.ShowScore(CasinoScore);
-
-                    if (CasinoCheck(CasinoScore) == false)
-                        break;
-                        return;
+                    RejectNextTurn(deck);
+                    break;
                 }
 
-                if (a == true)
+                if (UserInput == true)
                 {
-                    PlayerScore += TakeCard(deck);
-                    MSG.ShowScore(PlayerScore);
-
-                    CasinoScore += TakeCard(deck);
-                    MSG.ShowScore(CasinoScore);
-
-                    if (PlayerCheck(PlayerScore) == false)
-                        return;
-
-                    if (CasinoCheck(CasinoScore) == false)
-                        return;
+                    AcceptNextTurn(deck);
                 }
 
             }
+        }
+
+        public void AcceptNextTurn(List<Card> deck)
+        {
+            PlayerScore += TakeCard(deck);
+            ConsoleUI.ShowScore(PlayerScore);
+
+            CasinoScore += TakeCard(deck);
+            ConsoleUI.ShowScore(CasinoScore);
+
+            if (CheckPlayerScore(PlayerScore) == false)
+                return;
+
+            if (CheckCasinoScore(CasinoScore) == false)
+                return;
+        }
+
+        public void RejectNextTurn(List<Card> deck)
+        {
+            CasinoScore += TakeCard(deck);
+            ConsoleUI.ShowScore(CasinoScore);
+
+            if (CheckCasinoScore(CasinoScore) == false)
+            {
+                return;
+            }
+
         }
 
         public string CheckScore(int score)
         {
-            if (score == 21)
+            if (score == WinValue)
             {
                 return "BlackJack";
             }
-            if (score > 21)
+            if (score > WinValue)
             {
                 return "Too many";
             }
             return null;
         }
 
-        public bool PlayerCheck(int PlayerScore)
+        public bool CheckPlayerScore(int PlayerScore)
         {
             if (CheckScore(PlayerScore) == "BlackJack")
             {
-                MSG.PlayerWin();
+                ConsoleUI.ShowMessagePlayerWin();
                 return false;
             }
             if (CheckScore(PlayerScore) == "Too many")
             {
-                MSG.CasinoWin();
+                ConsoleUI.ShowMessageCasinoWin();
                 return false;
             }
             return true;
         }
 
-        public bool CasinoCheck(int CasinoScore)
+        public bool CheckCasinoScore(int CasinoScore)
         {
             if (CheckScore(CasinoScore) == "BlackJack")
             {
-                MSG.CasinoWin();
+                ConsoleUI.ShowMessageCasinoWin();
                 return false;
             }
             if (CheckScore(CasinoScore) == "Too many")
             {
-                MSG.PlayerWin();
+                ConsoleUI.ShowMessagePlayerWin();
                 return false;
             }
             return true;

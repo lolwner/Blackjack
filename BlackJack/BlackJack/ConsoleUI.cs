@@ -6,26 +6,28 @@ using System.Threading.Tasks;
 
 namespace BlackJack
 {
-    public static class MSG
+    public static class ConsoleUI
     {
-        public static void PlayerLeft()
+
+
+        public static void ShowMessagePlayerLeft()
         {
             Console.WriteLine("Player left the game");
         }
 
-        public static void PlayerWin()
+        public static void ShowMessagePlayerWin()
         {
             Console.WriteLine("Player win!");
         }
 
-        public static void CasinoWin()
+        public static void ShowMessageCasinoWin()
         {
             Console.WriteLine("Casino win!");
         }
 
         public static void ShowScore(int score)
         {
-            
+
             Console.WriteLine("Score is {0}", score);
         }
 
@@ -35,49 +37,38 @@ namespace BlackJack
             Console.WriteLine();
         }
 
-        public static bool Continue()
+        public static void ShowDialogContinue()
         {
             Console.WriteLine("Take card? y/n");
-            string choise = Console.ReadLine().ToString();
-
-            while (choise != "y" || choise != "n")
-            {
-                switch (choise)
-                {
-                    case "y":
-                        return true;
-                    case "n":
-                        return false;
-                    default:
-                        Console.WriteLine("Choose y or n");
-                        choise = Console.ReadLine().ToString();
-                        break;
-                }
-            }
-            return false;
-
         }
 
-        public static bool NewRound()
+        public static void ShowDialogNewRound()
         {
             Console.WriteLine("Start new round? y/n");
+        }
+
+        public static bool ShowDialogUserInput()
+        {
             string choise = Console.ReadLine().ToString();
 
             while (choise != "y" || choise != "n")
             {
-                switch (choise)
+                if (choise == "y")
                 {
-                    case "y":
-                        return true;
-                    case "n":
-                        return false;
-                    default:
-                        Console.WriteLine("Choose y or n");
-                        choise = Console.ReadLine().ToString();
-                        break;
+                    return true;
+                }
+                if (choise == "n")
+                {
+                    return false;
+                }
+                if (choise != "y" || choise != "n")
+                {
+                    Console.WriteLine("Choose y or n");
+                    choise = Console.ReadLine().ToString();
                 }
             }
             return false;
+
         }
     }
 }

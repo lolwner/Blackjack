@@ -10,7 +10,8 @@ namespace BlackJack
     {
         static void Main(string[] args)
         {
-            Round.BlackJack();
+
+            Round.StartGame();
             Console.ReadKey();
         }
     }
