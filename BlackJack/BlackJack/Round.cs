@@ -6,33 +6,35 @@ using System.Threading.Tasks;
 
 namespace BlackJack
 {
-    class Round
+    public class Round
     {
         public List<Card> InitializeDeck()
         {
             List<Card> cardDeck = new List<Card>();
-
+            const int NumericCards = 8;
 
             foreach (Suits suit in Enum.GetValues(typeof(Suits)))
             {
-                foreach (Face item in Enum.GetValues(typeof(Face)))
+                for (int i = 0; i < Enum.GetNames(typeof(Face)).Length; i++)
                 {
                     Card card = new Card();
-                    if (item == Face.Ace || item == Face.King || item == Face.Queen || item == Face.Jack)
+                    if (i <= NumericCards)
                     {
-                        card.Name = item.ToString();
+                        card.Name = Enum.GetName(typeof(Face), i);
+                        card.Value = i + 2;
+                        card.Suit = suit;
+                        cardDeck.Add(card);
+                        continue;
+                    }
+                    if (i > NumericCards)
+                    {
+                        card.Name = Enum.GetName(typeof(Face), i);
                         card.Value = 10;
                         card.Suit = suit;
                         cardDeck.Add(card);
-
-                        continue;
                     }
-                    card.Name = item.ToString();
-                    card.Value = (int)item;
-                    card.Suit = suit;
-                    cardDeck.Add(card);
+
                 }
-                
             }
             return cardDeck;
         }

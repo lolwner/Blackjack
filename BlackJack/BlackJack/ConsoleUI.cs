@@ -8,8 +8,6 @@ namespace BlackJack
 {
     public static class ConsoleUI
     {
-
-
         public static void ShowMessagePlayerLeft()
         {
             Console.WriteLine("Player left the game");

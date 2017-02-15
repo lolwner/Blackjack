@@ -8,8 +8,6 @@ namespace BlackJack
 {
     public class Deck
     {
-        public List<Card> cardDeck;
-        
-        
+        public List<Card> cardDeck; 
     }
 }

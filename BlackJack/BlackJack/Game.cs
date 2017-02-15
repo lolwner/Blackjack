@@ -34,10 +34,14 @@ namespace BlackJack
             ConsoleUI.ShowScore(CasinoScore);
 
             if (CheckPlayerScore(PlayerScore) == false)
+            {
                 return;
+            }
 
             if (CheckCasinoScore(CasinoScore) == false)
+            {
                 return;
+            }
 
             while (PlayerScore < WinValue && CasinoScore < WinValue)
             {

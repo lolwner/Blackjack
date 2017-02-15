@@ -8,7 +8,7 @@ namespace BlackJack
 {
     public enum Face
     {
-        Two = 2,
+        Two,
         Three,
         Four,
         Five,
